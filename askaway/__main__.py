@@ -17,7 +17,16 @@ def main():
             tablefmt="fancy_grid",
         )
     )
-    model_choice = int(input("Choose a model #: "))
+    while True:
+        try:
+            model_choice = int(input("Choose a model #: "))
+            if  0 <= model_choice < len(models):
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            print("Enter a valid model #!")
+
     prompt = input("Enter a prompt: ")
     for chunk in client.generate(models[model_choice], prompt):
         print(chunk, end="", flush=True)
